@@ -18,7 +18,6 @@ param deleteRetentionPolicy object = {}
 @allowed([ 'AzureDnsZone', 'Standard' ])
 param dnsEndpointType string = 'Standard'
 param files array = []
-param isHnsEnabled bool = false
 param kind string = 'StorageV2'
 param minimumTlsVersion string = 'TLS1_2'
 param queues array = []
@@ -32,6 +31,9 @@ param networkAcls object = {
 @allowed([ 'Enabled', 'Disabled' ])
 param publicNetworkAccess string = 'Enabled'
 param sku object = { name: 'Standard_LRS' }
+//  param whether Hierarchical namespace is on or off
+@allowed([ true, false ])
+param isHnsEnabled bool = false
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: name
@@ -46,11 +48,11 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     allowSharedKeyAccess: allowSharedKeyAccess
     defaultToOAuthAuthentication: defaultToOAuthAuthentication
     dnsEndpointType: dnsEndpointType
-    isHnsEnabled: isHnsEnabled
     minimumTlsVersion: minimumTlsVersion
     networkAcls: networkAcls
     publicNetworkAccess: publicNetworkAccess
     supportsHttpsTrafficOnly: supportsHttpsTrafficOnly
+    isHnsEnabled: isHnsEnabled
   }
 
   resource blobServices 'blobServices' = if (!empty(containers)) {
@@ -98,6 +100,15 @@ resource storage 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
 }
 
+// Get Stroage Account Key
+var storageAccountKeys = storage.listKeys().keys
+var storageAccountKey = storageAccountKeys[0].value
+
 output id string = storage.id
 output name string = storage.name
 output primaryEndpoints object = storage.properties.primaryEndpoints
+// container name output
+output containerName string = containers[0].name
+output storageAccountKey string = storageAccountKey
+// storage account connection string
+output storageAccountConnectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storage.name};AccountKey=${storageAccountKey};EndpointSuffix=core.windows.net'

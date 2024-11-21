@@ -46,7 +46,7 @@ resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
   tags: tags
   // The free tier does not support managed identity
   identity: searchIdentityProvider
-  properties: {
+  properties: { 
     authOptions: disableLocalAuth ? null : authOptions
     disableLocalAuth: disableLocalAuth
     disabledDataExfiltrationOptions: disabledDataExfiltrationOptions
@@ -61,8 +61,11 @@ resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
   sku: sku
 }
 
+// Output the primary key for the search service
+var aiSearchKey = search.listAdminKeys().primaryKey
+
 output id string = search.id
 output endpoint string = 'https://${name}.search.windows.net/'
 output name string = search.name
 output principalId string = !empty(searchIdentityProvider) ? search.identity.principalId : ''
-
+output primaryKey string = aiSearchKey
