@@ -188,6 +188,21 @@ module aiProject 'core/ai/project.bicep' = {
   }
 }
 
+// AI Services
+module aiservices 'core/ai/cognitiveservices-preview.bicep' = {
+  name: 'aiservices'
+  scope: rg
+  params: {
+    name: 'aiservices${abbrs.cognitiveServicesAccounts}${resourceToken}'
+    location: searchRegion
+    kind: 'CognitiveServices'
+    tags: tags
+    sku: {
+      name: 'S0'
+    }
+  }
+}
+
 // Role Assignment for AI Search. "Search Index Data Contributor" role to the AI Search service principal.
 // module aisearch_role 'core/security/role.bicep' = {
 //   name: 'aisearch-role-assignment'
