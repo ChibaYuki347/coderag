@@ -1,0 +1,11 @@
+promptflow
+promptflow-azure
+promptflow-core
+promptflow-tools
+promptflow-devkit
+promptflow-tracing
+promptflow-azure
+# script dependencies
+azure-ai-documentintelligence
+azure-core
+python-dotenv

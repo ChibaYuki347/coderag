@@ -2,3 +2,16 @@
 
 #ignore DS_Store
 .DS_Store
+
+venv/
+.venv/
+
+/data/codes/
+/data/docs/
+/data/evaluation/
+
+#db
+code_files.db
+
+#ignore pycache
+__pycache__/

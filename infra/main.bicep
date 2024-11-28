@@ -113,7 +113,7 @@ module openai 'core/ai/cognitiveservices.bicep' = {
         }
         sku: {
           name: 'Standard'
-          capacity: 8
+          capacity: 42
         }
       }
       {
@@ -239,3 +239,7 @@ output AZURE_SEARCH_KEY string = search.outputs.primaryKey
 output AZURE_OPENAI_ENDPOINT string = openai.outputs.endpoint
 output AZURE_OPENAI_KEY string = openai.outputs.accountKey
 output AZURE_OPENAI_EMBEDDING_MODEL string = embeddingModel
+
+// AI Services Ouputs
+output AZURE_AI_SERVICES_ENDPOINT string = aiservices.outputs.endpoint
+output AZURE_AI_SERVICES_KEY string = aiservices.outputs.accountKey
