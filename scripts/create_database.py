@@ -14,24 +14,39 @@ def create_database(db_name):
         CREATE TABLE IF NOT EXISTS code_files (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             file_name TEXT NOT NULL,
-            file_type TEXT NOT NULL,
+            file_extention TEXT NOT NULL,
             file_path TEXT NOT NULL,
             code TEXT NOT NULL,
             description TEXT NOT NULL
         )
     ''')
     cursor.execute('''
-            CREATE TABLE IF NOT EXISTS doc_files(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                file_name TEXT NOT NULL,
-                file_type TEXT NOT NULL,
-                file_path TEXT NOT NULL,
-                text TEXT NOT NULL
-            )
-        ''')
-    conn.commit()
-    print("Database created successfully")
-    conn.close()
+        CREATE TABLE IF NOT EXISTS doc_files (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            file_name TEXT NOT NULL,
+            file_extention TEXT NOT NULL,
+            file_type TEXT NOT NULL,
+            file_path TEXT NOT NULL,
+            text TEXT NOT NULL
+        )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS chunked_codes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            parent_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            code TEXT NOT NULL,
+            description TEXT NOT NULL
+        )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS chunked_docs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            parent_id INTEGER NOT NULL,
+            section TEXT NOT NULL,
+            text TEXT NOT NULL
+        )
+    ''')
 
 def main():
     create_database("code_files.db")

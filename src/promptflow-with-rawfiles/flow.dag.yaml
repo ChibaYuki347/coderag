@@ -1,0 +1,65 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_history: true
+    default: []
+  text_input:
+    type: string
+    is_chat_input: true
+    default: 画像を基づいてaspxとcssを作成してください
+  image:
+    type: image
+    default: 5eec2c26-9c2b-499a-b630-72ca66641b0b.png
+outputs:
+  answer:
+    type: string
+    reference: ${generate_code.output}
+    is_chat_output: true
+nodes:
+  - name: get_context
+    type: python
+    source:
+      type: code
+      path: get_context.py
+    inputs: {}
+  - name: generate_code
+    type: python
+    source:
+      type: code
+      path: generate_code.py
+    inputs:
+      system_prompt: ${Prompt_Variants.output}
+      image_base64: ${process_image.output}
+      text_input: ${inputs.text_input}
+  - name: Prompt_Variants
+    type: prompt
+    source:
+      type: code
+      path: Prompt_Variants.jinja2
+    inputs:
+      codes: ${get_code_str.output}
+      docs: ${get_doc_str.output}
+  - name: get_code_str
+    type: python
+    source:
+      type: code
+      path: get_code_str.py
+    inputs:
+      context: ${get_context.output}
+  - name: get_doc_str
+    type: python
+    source:
+      type: code
+      path: get_doc_str.py
+    inputs:
+      context: ${get_context.output}
+  - name: process_image
+    type: python
+    source:
+      type: code
+      path: process_image.py
+    inputs:
+      input_image: ${inputs.image}

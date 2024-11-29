@@ -1,0 +1,102 @@
+{
+  "package": {},
+  "code": {
+    "chat.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        },
+        "question": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "chat.jinja2"
+    },
+    "get_context.py": {
+      "type": "python",
+      "source": "get_context.py",
+      "function": "get_context"
+    },
+    "generate_code.py": {
+      "type": "python",
+      "inputs": {
+        "image_base64": {
+          "type": [
+            "string"
+          ]
+        },
+        "system_prompt": {
+          "type": [
+            "string"
+          ]
+        },
+        "text_input": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "generate_code.py",
+      "function": "inquiry_genai"
+    },
+    "Prompt_Variants.jinja2": {
+      "type": "prompt",
+      "inputs": {
+        "codes": {
+          "type": [
+            "string"
+          ]
+        },
+        "docs": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "Prompt_Variants.jinja2"
+    },
+    "get_code_str.py": {
+      "type": "python",
+      "inputs": {
+        "context": {
+          "type": [
+            "object"
+          ]
+        }
+      },
+      "description": "code_files_format example:\n{\n  \"id\": 8,\n  \"file_name\": \"**.css\",\n  \"file_extention\": \"css\",\n  \"file_type\": \"unknown\",\n  \"file_path\": \"**.css\",\n  \"code\": \"************\",\n  \"description\": \"************\"\n},",
+      "source": "get_code_str.py",
+      "function": "get_code_str"
+    },
+    "get_doc_str.py": {
+      "type": "python",
+      "inputs": {
+        "context": {
+          "type": [
+            "object"
+          ]
+        }
+      },
+      "description": "doc_files_format example:\n{\n    \"id\": 3,\n    \"file_name\": \"\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u898f\u7d04.md\",\n    \"file_extention\": \"md\",\n    \"file_type\": \"code-standard\",\n    \"file_path\": \"code-standard/\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u898f\u7d04.md\",\n    \"text\": \"- \u305d\u306e\u4ed6\u7d30\u304b\u306a\u4fee\u6b63\"\n}",
+      "source": "get_doc_str.py",
+      "function": "get_doc_str"
+    },
+    "process_image.py": {
+      "type": "python",
+      "inputs": {
+        "input_image": {
+          "type": [
+            "image"
+          ]
+        }
+      },
+      "source": "process_image.py",
+      "function": "process_image"
+    }
+  }
+}

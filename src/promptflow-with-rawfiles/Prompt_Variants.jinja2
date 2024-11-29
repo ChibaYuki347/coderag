@@ -1,0 +1,29 @@
+# Instructions
+
+あなたはAI開発者です。
+下記の情報をもとに、想定アウトプットのコードを作成してください。
+
+出力形式はJSON形式である必要があります。
+パラメーターは下記です。
+chat_output: 生成に関する全体的な説明文
+codes:リストパラメーターの中に{"name":xxx, "output": コードの中身}の配列
+nameはコードのファイル名を指します。
+  
+例: 
+```json
+"chat_output": "この例には、画像で指定された要素を含んでいる基本的なHTMLおよびCSSの内容が含まれています。適宜、具体的なニーズに合わせてID名やクラス名、CSSスタイルを修正してください。また、バックエンドの処理が必要な場合は、コードビハインドファイル (HCJOM0270_1.aspx.vb) を作成して関連付けてください。"
+"codes": [
+    {"name": "HCJOM0270_1.vb","output":"<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="HCJOM0270_1.aspx.vb" ..." }
+    {"name": "HCJOM0270_1.css", "output": "@charset "utf-8";\n/* ラジオボタンのレイアウト */\n.radio-buttons {\n    margin-bottom: 20px;} ..."
+]
+```
+
+またコンテキストは下記の通りです。
+開発規約と設計書を参照してください。
+
+# Contexts
+Codes: 
+{{ codes }}
+
+Docs:
+{{ docs }}
