@@ -97,6 +97,18 @@
       },
       "source": "process_image.py",
       "function": "process_image"
+    },
+    "create_chat_response.py": {
+      "type": "python",
+      "inputs": {
+        "generate_code_response": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "create_chat_response.py",
+      "function": "create_chat_response"
     }
   }
 }
